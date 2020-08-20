@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+		<link rel="shortcut icon" href="/global-res/favicon.ico">
+		<link rel="apple-touch-icon" href="/global-res/apple-touch-icon.png">
+
+		<title>Babylon</title>
+		<meta name="description" content="An intentionally weak cipher intended to make language barriers in an RPG.">
+		<meta name="author" content="Joshua Shaffer">
+
+		<link rel="stylesheet" type="text/css" href="/global-res/style-primary.css">
+		<link rel="stylesheet" type="text/css" href="style.css">
+
+		<script type="text/javascript" src="/global-res/random.js"></script>
+		<script type="text/javascript" src="script.js"></script>
+	</head>
+	<body>
+		<div onkeyup="doDaStuff();">
+			Seed: <input type="number" id="seed" value="1234567890"><br>
+			<textarea id="txt-in" rows="12" cols="75">
+Hello world! This is an intentionally weak cipher. It ciphers text in such a way that:
+ * Digits stay digits.
+ * Capitals stay capital.
+ * Lowercase stays lowercase.
+ * Vowels stay vowels.
+ * Consonants stay consonants.
+ * Each word is scrambled the same way every time.
+ * All non-alphanumeric characters stay the same.
+This might be useful in an MMORGP to implement language barriers between races. The text would remain in the same layout and repeated words would be recognizable.
+			</textarea>
+		</div>
+		<p>&dArr;</p>
+		<textarea id="txt-out" rows="12" cols="75" readonly>/Error/</textarea>
+	</body>
+</html>
