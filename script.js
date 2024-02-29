@@ -1,49 +1,57 @@
-var con;
-var doDaStuff;
-window.onload = function() {
-	con = {
-		txtin : document.getElementById("txt-in"),
-		txtout : document.getElementById("txt-out"),
-		seed : document.getElementById('seed')
-	};
-	doDaStuff = (function() {
-		var charOfConq = [5];
-		charOfConq[0] = "aeiouy";
-		charOfConq[1] = "bcdfghjklmnpqrstvwxz";
-		charOfConq[2] = charOfConq[0].toUpperCase();
-		charOfConq[3] = charOfConq[1].toUpperCase();
-		charOfConq[4] = "1234567890";
+window.addEventListener("load", function () {
+  /** @type {HTMLTextAreaElement} */
+  const inputTextArea = document.getElementById("txt-in");
 
-		rand = newRandomGenerator();
+  /** @type {HTMLTextAreaElement} */
+  const outputTextArea = document.getElementById("txt-out");
 
-		return function() {
-			var txtin = con.txtin.value;
-			var seed = parseInt(con.seed.value);
+  /** @type {HTMLInputElement} */
+  const seedInput = document.getElementById("seed");
 
-			rand.setSeed(seed);
-			var output = "";
-			charator:
-			for (var i = 0, len = txtin.length; i < len; i++) {
-				var c = txtin.charAt(i);
-				for (var j = 0; j < 5; j++) {
-					var s = charOfConq[j];
-					var index = s.indexOf(c);
-					if (index >= 0) {
-						l = s.length;
-						index += Math.floor(rand.number() * l);
-						if (index >= l) {
-							index -= l;
-						}
-						output += s.charAt(index);
-						continue charator;
-					}
-				}
-				output += txtin.charAt(i);
-				rand.setSeed(seed);
-			}
+  const lowerCaseVowels = "aeiouy";
+  const lowerCaseConsonants = "bcdfghjklmnpqrstvwxz";
+  const upperCaseVowels = lowerCaseVowels.toUpperCase();
+  const upperCaseConsonants = lowerCaseConsonants.toUpperCase();
+  const digits = "1234567890";
 
-			con.txtout.innerHTML = output;
-		};
-	})();
-	doDaStuff();
-};
+  const scrambleSets = [
+    lowerCaseVowels,
+    lowerCaseConsonants,
+    upperCaseVowels,
+    upperCaseConsonants,
+    digits,
+  ];
+
+  function updateBabel() {
+    const input = inputTextArea.value;
+    const seed = parseInt(seedInput.value);
+
+    const rand = new RandomGenerator();
+    rand.seed = seed;
+
+    let output = "";
+
+    eachChar: for (const inputChar of input) {
+      for (const s of scrambleSets) {
+        const index = s.indexOf(inputChar);
+        if (index >= 0) {
+          output += s.charAt(
+            (index + Math.floor(rand.number() * s.length)) % s.length
+          );
+          continue eachChar;
+        }
+      }
+
+      // If the character is not in any of the character sets, just copy it over.
+      output += inputChar;
+      rand.seed = seed;
+    }
+
+    outputTextArea.value = output;
+  }
+
+  updateBabel();
+
+  inputTextArea.addEventListener("input", updateBabel);
+  seedInput.addEventListener("input", updateBabel);
+});
