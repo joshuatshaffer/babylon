@@ -12,8 +12,10 @@
     <meta name="author" content="Joshua Shaffer" />
 
     <style>
-      form {
+      main {
         max-width: max-content;
+        margin-left: auto;
+        margin-right: auto;
       }
       form > div {
         margin: 1em 0;
@@ -31,15 +33,16 @@
     <script type="text/javascript" src="script.js"></script>
   </head>
   <body>
-    <h1>Babylon</h1>
-    <form onsubmit="return false;">
-      <div>
-        <label for="seed">Seed</label>
-        <input id="seed" type="number" value="1234567890" />
-      </div>
-      <div>
-        <label for="txt-in">Input text</label>
-        <textarea id="txt-in" rows="12" cols="75">
+    <main>
+      <h1>Babylon</h1>
+      <form onsubmit="return false;">
+        <div>
+          <label for="seed">Seed</label>
+          <input id="seed" type="number" value="1234567890" />
+        </div>
+        <div>
+          <label for="txt-in">Input text</label>
+          <textarea id="txt-in" rows="12" cols="75">
 Hello world! This is an intentionally weak cipher. It ciphers text in such a way that:
  * Digits stay digits.
  * Capitals stay capital.
@@ -50,12 +53,13 @@ Hello world! This is an intentionally weak cipher. It ciphers text in such a way
  * All non-alphanumeric characters stay the same.
 This might be useful in an MMORGP to implement language barriers between races. The text would remain in the same layout and repeated words would be recognizable.
 </textarea
-        >
-      </div>
-      <div>
-        <label for="txt-out">Output text</label>
-        <textarea id="txt-out" rows="12" cols="75" readonly>/Error/</textarea>
-      </div>
-    </form>
+          >
+        </div>
+        <div>
+          <label for="txt-out">Output text</label>
+          <textarea id="txt-out" rows="12" cols="75" readonly>/Error/</textarea>
+        </div>
+      </form>
+    </main>
   </body>
 </html>
