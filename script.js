@@ -54,4 +54,13 @@ window.addEventListener("load", function () {
 
   inputTextArea.addEventListener("input", updateBabel);
   seedInput.addEventListener("input", updateBabel);
+
+  inputTextArea.addEventListener("scroll", function () {
+    outputTextArea.scrollTop = inputTextArea.scrollTop;
+    outputTextArea.scrollLeft = inputTextArea.scrollLeft;
+  });
+  outputTextArea.addEventListener("scroll", function () {
+    inputTextArea.scrollTop = outputTextArea.scrollTop;
+    inputTextArea.scrollLeft = outputTextArea.scrollLeft;
+  });
 });
