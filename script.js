@@ -55,6 +55,7 @@ window.addEventListener("load", function () {
   inputTextArea.addEventListener("input", updateBabel);
   seedInput.addEventListener("input", updateBabel);
 
+  // Sync the scroll position of the text areas.
   inputTextArea.addEventListener("scroll", function () {
     outputTextArea.scrollTop = inputTextArea.scrollTop;
     outputTextArea.scrollLeft = inputTextArea.scrollLeft;
@@ -63,4 +64,21 @@ window.addEventListener("load", function () {
     inputTextArea.scrollTop = outputTextArea.scrollTop;
     inputTextArea.scrollLeft = outputTextArea.scrollLeft;
   });
+
+  // Sync the size of the text areas.
+  const resizeObserver = new ResizeObserver((entries) => {
+    for (const entry of entries) {
+      /** @type HTMLElement */
+      const target = entry.target;
+
+      inputTextArea.style.width = target.style.width;
+      inputTextArea.style.height = target.style.height;
+
+      outputTextArea.style.width = target.style.width;
+      outputTextArea.style.height = target.style.height;
+    }
+  });
+
+  resizeObserver.observe(inputTextArea);
+  resizeObserver.observe(outputTextArea);
 });
